@@ -1,0 +1,6 @@
+path: /Users/kbtha/Desktop/Automated-Face-Blurring/data
+train: images
+val: images
+
+names:
+  0: face

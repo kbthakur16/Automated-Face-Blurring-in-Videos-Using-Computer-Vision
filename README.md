@@ -1,85 +1,52 @@
-# Automated Face and Object Blurring
+# README
 
 ## Overview
-This project demonstrates real-time face and object detection with automatic blurring using two different approaches:
 
-1. **Face Detection & Blurring using MediaPipe**
-2. **Object Detection & Blurring using YOLO (Ultralytics)**
-
-Both scripts process a video feed, detect relevant entities, and apply a blur effect to anonymize detected faces or objects.
-
----
+This repository contains two Python scripts demonstrating real-time object and face detection with blurring in video feeds. The first script utilizes the YOLO object detection model via the Ultralytics library to detect and blur objects. The second script employs the MediaPipe library for face detection and blurring.
 
 ## Requirements
-Ensure you have the following dependencies installed before running the scripts:
+
+The following dependencies are required to run the scripts:
 
 - Python
-- OpenCV (`cv2` library)
-- MediaPipe (for face detection)
-- Ultralytics (for YOLO object detection)
-- YOLO model weights
+- OpenCV (cv2) library
+- Ultralytics library (for object detection)
+- YOLO model weights (for object detection)
+- MediaPipe library (for face detection)
 
-You can install the required dependencies using:
-```sh
-pip install opencv-python mediapipe ultralytics
-```
+## Object Detection and Blurring (YOLO)
 
----
+### Description
 
-## Face Detection & Blurring (MediaPipe)
-### Description:
-- The script utilizes **MediaPipe Face Detection** to detect faces in video frames.
-- Detected faces are highlighted with bounding boxes and blurred for privacy.
-- The processed frames are displayed and saved to an output video file.
+- Imports necessary libraries: `os` for file handling, `cv2` for OpenCV, and `YOLO` from Ultralytics.
+- Loads the YOLO model using the `YOLO` class and specifies the configuration file (`yolov8n.yaml`).
+- Initiates training using the `train` method, specifying the training data configuration (`config.yaml`) and the number of epochs.
+- Reads the video file frame by frame using OpenCV's `VideoCapture` class.
+- Detects objects in each frame using the YOLO model and applies a blur effect to detected objects.
+- Writes processed frames to an output video file using OpenCV's `VideoWriter` class.
+- Displays the processed video feed in a window named "Detection" (press 'q' to exit).
 
-### Usage:
-Run the script with a video file as input:
-```sh
-python face_blur.py --input input_video.mp4 --output output_video.mp4
-```
-Press `q` to exit the live preview.
+### Output
 
----
+- Generates an output video file named **"Output.mp4"** containing the processed video with objects detected and blurred.
 
-## Object Detection & Blurring (YOLO)
-### Description:
-- The script employs **YOLOv8** (via Ultralytics) for object detection.
-- Objects detected in each frame are boxed and blurred.
-- Supports real-time processing and video file input.
+## Face Detection and Blurring (MediaPipe)
 
-### Usage:
-Run the script with the required model weights and video file:
-```sh
-python object_blur.py --input input_video.mp4 --output output_video.mp4 --weights yolov8n.pt
-```
-Press `q` to exit the live preview.
+### Description
 
----
+- Imports necessary libraries: `cv2` for OpenCV and `mediapipe` for face detection.
+- Defines a function `process_img` to process each video frame, detect faces, draw bounding boxes, and apply a blur effect.
+- Reads frames from the input video file, processes each frame using `process_img`, and writes the processed frames to an output video file.
+- Initializes the face detection model using the `mp_face_detection.FaceDetection` class, allowing configuration of confidence threshold and model type.
+- Displays the processed video feed in a window named "Mediapipe Feed" (press 'q' to exit).
 
-## Output
-Both scripts generate an output video file (`output_video.mp4`) containing the processed video with faces or objects detected and blurred.
+### Output
 
----
+- Generates an output video file named **"Output.mp4"** containing the processed video with faces detected and blurred.
 
-## Notes
-- You can adjust confidence thresholds and detection models as needed.
-- Ensure the correct YOLO weights (`yolov8n.pt`) are available before running the object detection script.
+## Usage
 
----
+1. Install required dependencies using `pip install opencv-python mediapipe ultralytics`.
+2. Run the respective script for object or face detection.
+3. Provide an input video file and obtain an output video with detection and blurring applied.
 
-## License
-This project is open-source and available under the MIT License.
-
----
-
-## Contributing
-Pull requests and suggestions are welcome! Feel free to enhance the detection models, optimize processing, or add new features.
-
----
-
-## Contact
-For any questions, feel free to raise an issue or reach out.
-
----
-
-Enjoy building privacy-focused video processing applications! 🚀
